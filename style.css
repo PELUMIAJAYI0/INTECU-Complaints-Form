@@ -1,0 +1,475 @@
+/* card_issue_style.css */
+
+:root {
+    --logo-blue: #002B7F;
+    --logo-gold: #FDB813;
+    
+    /* Dark Mode (Default) */
+    --page-bg-dark: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+    --form-container-bg-dark: rgba(17, 34, 64, 0.65); /* Slightly more opaque for readability */
+    --form-container-border-dark: rgba(253, 184, 19, 0.25);
+    --text-primary-dark: #ccd6f6;
+    --text-secondary-dark: #8892b0;
+    --text-headings-dark: #e6f1ff;
+    --input-bg-dark: rgba(10, 25, 47, 0.7);
+    --input-border-dark: var(--logo-blue); /* #2c3e50; */
+    --input-focus-border-dark: var(--logo-gold);
+    --input-text-dark: var(--text-primary-dark);
+    --input-placeholder-dark: rgba(136, 146, 176, 0.6);
+    --button-bg-dark: var(--logo-gold);
+    --button-text-dark: var(--logo-blue);
+    --button-hover-bg-dark: #ffc733;
+    --shadow-dark: rgba(2, 12, 27, 0.5);
+    --separator-dark: rgba(253, 184, 19, 0.2);
+
+    /* Light Mode */
+    --page-bg-light: linear-gradient(135deg, #e9effc 0%, #d8e2f8 100%);
+    --form-container-bg-light: rgba(255, 255, 255, 0.75);
+    --form-container-border-light: rgba(0, 43, 127, 0.2);
+    --text-primary-light: #2c3e50;
+    --text-secondary-light: #4a5e78;
+    --text-headings-light: var(--logo-blue);
+    --input-bg-light: rgba(240, 244, 248, 0.9);
+    --input-border-light: #b0c4de;
+    --input-focus-border-light: var(--logo-blue);
+    --input-text-light: #1c2a3a;
+    --input-placeholder-light: #778899;
+    --button-bg-light: var(--logo-blue);
+    --button-text-light: var(--logo-gold);
+    --button-hover-bg-light: #0037a0;
+    --shadow-light: rgba(100, 100, 150, 0.15);
+    --separator-light: rgba(0, 43, 127, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--page-bg-dark);
+    color: var(--text-primary-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Allow footer to be at bottom */
+    justify-content: center; /* Center content vertically */
+    align-items: center;
+    padding: 2rem 1rem;
+    transition: background 0.4s ease, color 0.4s ease;
+    font-size: 16px; /* Base font size */
+}
+
+.form-page-container {
+    width: 100%;
+    max-width: 750px; /* Wider for a form */
+    background: var(--form-container-bg-dark);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border-radius: 24px;
+    border: 1px solid var(--form-container-border-dark);
+    box-shadow: 0 20px 50px var(--shadow-dark);
+    overflow: hidden; /* For animations and rounded corners */
+    animation: fadeInScaleUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Theme Toggle for Form Page --- */
+.theme-toggle-form-page {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    z-index: 1001;
+}
+.theme-toggle-form-page label {
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--logo-gold); /* Default (dark mode) toggle color */
+}
+.theme-toggle-form-page label:hover {
+    transform: scale(1.15) rotate(20deg);
+}
+/* Hide default checkbox */
+.theme-toggle-form-page input[type="checkbox"] {
+    display: none;
+}
+
+
+/* --- Header --- */
+.form-page-header {
+    padding: 25px 35px;
+    text-align: center;
+    border-bottom: 1px solid var(--separator-dark);
+    background: rgba(0,0,0,0.1); /* Subtle darker header within the glass */
+}
+.form-header-logo {
+    height: 50px;
+    margin-bottom: 15px;
+    animation: logoPulse 2s infinite ease-in-out alternate;
+}
+.form-page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-headings-dark);
+    margin-bottom: 8px;
+}
+.form-page-header p {
+    font-size: 0.95rem;
+    color: var(--text-secondary-dark);
+}
+
+/* --- Main Form Wrapper --- */
+.form-wrapper {
+    padding: 25px 35px;
+    flex-grow: 1; /* Allows main content to take space */
+    overflow-y: auto; /* Scroll if content is too long */
+}
+
+/* --- Form Sections --- */
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--separator-dark);
+    animation: slideUpFadeIn 0.6s ease-out forwards;
+    opacity: 0; /* Start hidden for animation */
+}
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.form-section h2 {
+    font-size: 1.3rem;
+    color: var(--text-headings-dark);
+    margin-bottom: 20px;
+    font-weight: 500;
+    position: relative;
+    padding-left: 15px;
+}
+.form-section h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 70%;
+    background-color: var(--logo-gold);
+    border-radius: 3px;
+}
+
+/* --- Form Grid & Groups --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between label and input */
+    position: relative; /* For animations/hints */
+}
+.form-group.full-width {
+    grid-column: 1 / -1; /* Span full width */
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary-dark);
+    transition: color 0.3s ease;
+}
+.form-group label .required {
+    color: var(--logo-gold);
+    font-weight: bold;
+    margin-left: 2px;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    background-color: var(--input-bg-dark);
+    color: var(--input-text-dark);
+    border: 1px solid var(--input-border-dark);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    appearance: none; /* For select custom arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238892b0' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Default dark mode arrow */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px; /* Make space for arrow */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--input-focus-border-dark);
+    box-shadow: 0 0 0 3px rgba(from var(--logo-gold) r g b / 0.35); /* Use from to get rgba */
+    background-color: rgba(from var(--input-bg-dark) r g b / 0.9); /* Slightly change bg on focus */
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--input-placeholder-dark);
+    opacity: 0.8;
+}
+.form-group small.field-hint {
+    font-size: 0.75rem;
+    color: var(--text-secondary-dark);
+    opacity: 0.7;
+    padding-left: 2px;
+}
+
+/* --- Form Actions & Submit Button --- */
+.form-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+.form-submit-btn {
+    padding: 14px 35px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    background: var(--button-bg-dark);
+    color: var(--button-text-dark);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden; /* For ripple/shine effect */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px; /* Ensure button has a decent width */
+}
+.form-submit-btn:hover {
+    background: var(--button-hover-bg-dark);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(from var(--logo-gold) r g b / 0.25);
+}
+.form-submit-btn:active {
+    transform: translateY(-1px) scale(1);
+    box-shadow: 0 4px 10px rgba(from var(--logo-gold) r g b / 0.2);
+}
+
+/* Loader for submit button */
+.btn-loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3); /* Light border for spinner */
+    border-top-color: var(--logo-blue); /* Spinner color, matching button text */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+.form-submit-btn .btn-text.hidden {
+    display: none;
+}
+
+/* --- Submission Status Message --- */
+.form-status-message {
+    margin-top: 20px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none; /* Hidden by default */
+    animation: popIn 0.5s ease forwards;
+}
+.form-status-message.success {
+    background-color: rgba(from var(--logo-gold) r g b / 0.2);
+    color: var(--logo-gold);
+    border: 1px solid var(--logo-gold);
+}
+.form-status-message.error {
+    background-color: rgba(255, 82, 82, 0.15); /* Reddish for error */
+    color: #ff5252;
+    border: 1px solid #ff5252;
+}
+
+/* --- Footer --- */
+.form-page-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary-dark);
+    border-top: 1px solid var(--separator-dark);
+    background: rgba(0,0,0,0.05);
+}
+
+/* --- LIGHT MODE STYLES --- */
+body.light-mode {
+    background: var(--page-bg-light);
+    color: var(--text-primary-light);
+}
+body.light-mode .theme-toggle-form-page label {
+    color: var(--logo-blue);
+}
+body.light-mode .form-page-container {
+    background: var(--form-container-bg-light);
+    border-color: var(--form-container-border-light);
+    box-shadow: 0 20px 50px var(--shadow-light);
+}
+body.light-mode .form-page-header {
+    border-bottom-color: var(--separator-light);
+    background: rgba(255,255,255,0.1);
+}
+body.light-mode .form-page-header h1 {
+    color: var(--text-headings-light);
+}
+body.light-mode .form-page-header p {
+    color: var(--text-secondary-light);
+}
+body.light-mode .form-section {
+    border-bottom-color: var(--separator-light);
+}
+body.light-mode .form-section h2 {
+    color: var(--text-headings-light);
+}
+body.light-mode .form-section h2::before {
+    background-color: var(--logo-blue); /* Accent color change */
+}
+body.light-mode .form-group label {
+    color: var(--text-secondary-light);
+}
+body.light-mode .form-group label .required {
+    color: var(--logo-blue); /* Accent color for required */
+}
+body.light-mode .form-group input[type="text"],
+body.light-mode .form-group input[type="email"],
+body.light-mode .form-group input[type="tel"],
+body.light-mode .form-group select,
+body.light-mode .form-group textarea {
+    background-color: var(--input-bg-light);
+    color: var(--input-text-light);
+    border-color: var(--input-border-light);
+}
+body.light-mode .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232c3e50' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Light mode arrow */
+}
+body.light-mode .form-group input:focus,
+body.light-mode .form-group select:focus,
+body.light-mode .form-group textarea:focus {
+    border-color: var(--input-focus-border-light);
+    box-shadow: 0 0 0 3px rgba(from var(--logo-blue) r g b / 0.25);
+    background-color: rgba(from var(--input-bg-light) r g b / 0.9);
+}
+body.light-mode .form-group input::placeholder,
+body.light-mode .form-group textarea::placeholder {
+    color: var(--input-placeholder-light);
+}
+body.light-mode .form-group small.field-hint {
+    color: var(--text-secondary-light);
+}
+body.light-mode .form-submit-btn {
+    background: var(--button-bg-light);
+    color: var(--button-text-light);
+}
+body.light-mode .form-submit-btn:hover {
+    background: var(--button-hover-bg-light);
+    box-shadow: 0 8px 15px rgba(from var(--logo-blue) r g b / 0.2);
+}
+body.light-mode .form-submit-btn:active {
+    box-shadow: 0 4px 10px rgba(from var(--logo-blue) r g b / 0.15);
+}
+body.light-mode .btn-loader {
+    border-top-color: var(--logo-gold); /* Spinner color for light mode button */
+}
+
+body.light-mode .form-status-message.success {
+    background-color: rgba(from var(--logo-blue) r g b / 0.1);
+    color: var(--logo-blue);
+    border: 1px solid var(--logo-blue);
+}
+/* Error color remains same for light/dark for high visibility */
+body.light-mode .form-page-footer {
+    color: var(--text-secondary-light);
+    border-top-color: var(--separator-light);
+    background: rgba(255,255,255,0.05);
+}
+
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInScaleUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Stagger animations for form sections for a nicer effect */
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+/* Add more if you have more direct .form-section children in .form-wrapper */
+
+
+@keyframes logoPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    80% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+
+/* --- RESPONSIVENESS --- */
+@media screen and (max-width: 768px) {
+    .form-page-header h1 { font-size: 1.6rem; }
+    .form-page-header p { font-size: 0.9rem; }
+    .form-section h2 { font-size: 1.15rem; }
+    .form-wrapper { padding: 20px 25px; }
+    .form-page-header { padding: 20px 25px; }
+}
+
+@media screen and (max-width: 480px) {
+    body { padding: 1rem 0.5rem; }
+    .form-page-container { border-radius: 16px; max-width: 95%; }
+    .form-page-header h1 { font-size: 1.4rem; }
+    .form-grid { grid-template-columns: 1fr; } /* Stack all fields */
+    .form-submit-btn { font-size: 0.95rem; padding: 12px 25px; }
+    .theme-toggle-form-page { top: 10px; right: 10px; }
+    .theme-toggle-form-page label { font-size: 1.4rem; }
+}
