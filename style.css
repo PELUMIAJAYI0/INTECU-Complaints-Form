@@ -100,6 +100,23 @@ body {
     display: none;
 }
 
+.field-hint.important-notice {
+    color: var(--logo-gold); /* Or a distinct warning color */
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 10px;
+    border: 1px dashed var(--logo-gold); /* Or warning color */
+    border-radius: 6px;
+    background-color: rgba(from var(--logo-gold) r g b / 0.1); /* Subtle background */
+    margin-top: 5px; /* Add some space above */
+    opacity: 1; /* Override default hint opacity if needed */
+}
+
+body.light-mode .field-hint.important-notice {
+    color: var(--logo-blue);
+    border-color: var(--logo-blue);
+    background-color: rgba(from var(--logo-blue) r g b / 0.05);
+}
 
 /* --- Header --- */
 .form-page-header {

@@ -1,10 +1,11 @@
+<!-- card_issue_form.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INTECU Access Card Issue Report</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Make sure this points to card_issue_style.css -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,11 +17,12 @@
     <div class="form-page-container">
         <header class="form-page-header">
             <img src="logo.png" alt="INTECU Logo" class="form-header-logo"> <!-- Ensure logo.png exists -->
-            <h1>INTECU Access Card Issue Report</h1>
+            <h1>INTECU Virtual Assistant</h1>
             <p>Please provide details about the unreadable or problematic card.</p>
         </header>
 
         <main class="form-wrapper">
+            <!-- REMOVED action and method, as no submission is intended for this specific request -->
             <form id="cardIssueForm">
                 <section class="form-section card-details-section">
                     <h2>Card Information</h2>
@@ -32,23 +34,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="readablePart">Which part is unreadable? <span class="required">*</span></label>
+                            <label for="readablePart">What is the issue? <span class="required">*</span></label>
                             <select id="readablePart" name="readablePart" required>
                                 <option value="" disabled selected>Select an option...</option>
                                 <option value="username_unreadable">Username is unreadable</option>
                                 <option value="password_unreadable">Password is unreadable</option>
-                                <option value="both_unreadable">Both Username & Password are unreadable</option>
+                                <option value="both_unreadable_visit_intecu">Both Username & Password are unreadable</option>
                                 <option value="other_issue">Other card issue (e.g., damaged, not working)</option>
                             </select>
                         </div>
-
+                         <div class="form-group full-width" id="bothUnreadableMessage" style="display: none; margin-top: -10px;">
+                            <p class="field-hint important-notice">
+                                If both username and password are unreadable, please visit the INTECU office directly for assistance. This form cannot be used for this specific issue.
+                            </p>
+                        </div>
                         <div class="form-group" id="otherIssueDescriptionGroup" style="display: none;">
                             <label for="otherIssueDescription">Describe the "Other Issue" <span class="required">*</span></label>
                             <textarea id="otherIssueDescription" name="otherIssueDescription" rows="3" placeholder="e.g., Card is physically broken, Card doesn't log in even with correct details."></textarea>
                         </div>
                     </div>
                 </section>
-                
                 <section class="form-section visible-credentials-section" id="visibleCredentialsSection" style="display: none;">
                     <h2>Visible Credentials (if applicable)</h2>
                      <div class="form-grid">
@@ -56,14 +61,12 @@
                             <label for="visibleUsername">Visible Username</label>
                             <input type="text" id="visibleUsername" name="visibleUsername" placeholder="Enter the username you can read">
                         </div>
-
                         <div class="form-group" id="visiblePasswordGroup" style="display: none;">
                             <label for="visiblePassword">Visible Password</label>
                             <input type="text" id="visiblePassword" name="visiblePassword" placeholder="Enter the password you can read">
                         </div>
                     </div>
                 </section>
-
                 <section class="form-section reporter-details-section">
                     <h2>Your Contact Information</h2>
                     <div class="form-grid">
@@ -71,24 +74,22 @@
                             <label for="reporterName">Full Name <span class="required">*</span></label>
                             <input type="text" id="reporterName" name="reporterName" required placeholder="e.g., Bamidele Adekunle">
                         </div>
-
                         <div class="form-group">
                             <label for="reporterId">Student/Staff ID (if applicable)</label>
                             <input type="text" id="reporterId" name="reporterId" placeholder="e.g., CSC/2020/001 or Staff No.">
                         </div>
-                        
                         <div class="form-group">
                             <label for="reporterEmail">Email Address <span class="required">*</span></label>
+                            <!-- Changed name back from _replyto as Formspree is not used here -->
                             <input type="email" id="reporterEmail" name="reporterEmail" required placeholder="e.g., your_email@oauife.edu.ng">
                         </div>
-
                         <div class="form-group">
                             <label for="reporterPhone">Mobile Number <span class="required">*</span></label>
                             <input type="tel" id="reporterPhone" name="reporterPhone" required placeholder="e.g., 08012345678">
                         </div>
                     </div>
                 </section>
-                
+                <!-- Removed hidden _subject field as Formspree is not used -->
                 <div class="form-actions">
                     <button type="submit" class="form-submit-btn">
                         <span class="btn-text">Submit Report</span>
@@ -96,16 +97,13 @@
                     </button>
                 </div>
             </form>
-            <div id="formSubmissionStatus" class="form-status-message">
-                <!-- Messages like "Report submitted successfully!" will appear here -->
-            </div>
+            <!-- This div will not be used for submission status in this simplified version -->
+            <!-- <div id="formSubmissionStatus" class="form-status-message"></div> -->
         </main>
-
         <footer class="form-page-footer">
             <p>© <span id="currentYear"></span> INTECU, Obafemi Awolowo University. All Rights Reserved.</p>
         </footer>
     </div>
-
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Make sure this points to card_issue_script.js -->
 </body>
 </html>
